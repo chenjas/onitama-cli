@@ -1,3 +1,5 @@
-test/
+onitama-cli
 *.o
 *.exe
+
+test/
