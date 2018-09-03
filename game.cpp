@@ -3,7 +3,7 @@
 using namespace std;
 
 // All the different cards of Onitama
-array<Card, 16> CARDS = {
+array<Card, NUM_CARDS> CARDS = {
     Card("Tiger",
             { {-2,  0}, {1,  0} }),
     Card("Dragon",
