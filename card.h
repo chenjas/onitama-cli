@@ -6,11 +6,9 @@
 #include <string>
 #include "game.h"
 
-struct move {
+struct Move {
     int rows, cols;
 };
-
-using Move = struct move;
 
 class Card {
 public:
