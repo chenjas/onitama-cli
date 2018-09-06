@@ -11,5 +11,5 @@ onitama-cli: onitama-cli.o game.o card.o state.o player.o board.o
 	g++ $(CFLAGS) -c $<
 
 clean:
-	rm -f *.o onitama-cli
+	rm -f *.o onitama-cli *.exe
 

@@ -7,10 +7,11 @@ Card::Card(string n, vector<Move> m) {
     moves = m;
 }
 
-void Card::render(int row, bool rotated) {
+string Card::render(int row, bool rotated) {
+    string result = "";
     for (int col = 0; col < BOARD_SIZE; col++) {
         if (row == 2 && col == 2) {
-            cout << "# ";
+            result += "# ";
             continue;
         }
         bool moveMatch = false;
@@ -26,7 +27,8 @@ void Card::render(int row, bool rotated) {
                 break;
             }
         }
-        cout << (moveMatch ? '@' : '.');
-        if (col < BOARD_SIZE - 1) cout << ' ';
+        result += (moveMatch ? "@" : ".");
+        if (col < BOARD_SIZE - 1) result += " ";
     }
+    return result;
 }

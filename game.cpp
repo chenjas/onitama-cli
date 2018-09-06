@@ -1,4 +1,6 @@
 #include "game.h"
+#include "player.h"
+#include "board.h"
 
 using namespace std;
 
@@ -46,7 +48,10 @@ Game *Game::getInstance() {
 }
 
 Game::Game() {
-
+    Player p1(PlayerId::P1, &(CARDS[0]), &(CARDS[1]));
+    Player p2(PlayerId::P2, &(CARDS[2]), &(CARDS[3]));
+    Board board(p1, p2);
+    cout << board.render(PlayerId::P1) << endl;
 }
 
 Game *Game::instance = 0;

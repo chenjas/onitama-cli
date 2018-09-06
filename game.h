@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <array>
+#include <iostream>
 #include <stack>
 #include "card.h"
 
