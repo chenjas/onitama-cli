@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Board::Board(Player p1, Player p2): grid{0} {
+Board::Board(Player& p1, Player& p2): grid{0} {
     for (int i = 0; i < p1.pawns.size(); i++) {
         Piece *pp = &(p1.pawns[i]);
         grid[pp->row][pp->col] = pp;
@@ -19,7 +19,7 @@ Board::Board(Player p1, Player p2): grid{0} {
     }
 }
 
-string Board::render(PlayerId pid) {
+string Board::render(PlayerId currPlayer) {
     string result = "";
     for (int row = 0; row < BOARD_SIZE; row++) {
         // Each row is 3 lines wide
@@ -32,15 +32,21 @@ string Board::render(PlayerId pid) {
                 result += "       |       |       |       |       \n";
             }
             else {
-                result += "       |       |       |       |       \n";
-                //for (int col = 0; col < BOARD_SIZE; col++) {
-                //    if (pid == PlayerId::P1) {
-
-                //    }
-                //    else {
-
-                //    }
-                //}
+                for (int col = 0; col < BOARD_SIZE; col++) {
+                    const Piece *pp ;
+                    if (currPlayer == PlayerId::P1) {
+                        pp = grid[row][col];
+                    } else {
+                        pp = grid[BOARD_SIZE-1 - row][BOARD_SIZE-1 - col];
+                    }
+                    if (pp) {
+                        result += "   " + pp->render(currPlayer) + "   ";
+                    } else {
+                        result += "       ";
+                    }
+                    if (col < BOARD_SIZE-1) result += "|";
+                }
+                result += "\n";
             }
         }
         if (row != BOARD_SIZE-1) {

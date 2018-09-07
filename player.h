@@ -13,6 +13,7 @@ struct Piece {
     int row, col;
     Piece();
     Piece(PlayerId, PieceId, int, int);
+    std::string render(PlayerId) const;
 };
 
 class Player {
