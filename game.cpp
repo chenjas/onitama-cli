@@ -52,11 +52,18 @@ Game::Game() {
     for (int i = 0; i < BOARD_SIZE; i++) {
         gameCards[i] = &(CARDS[i]);
     }
+
     State s1(gameCards);
     cout << s1.board.render(PlayerId::P1) << endl;
-    const Card *card = &CARDS[0];
-    State s2(s1, PieceId::p2, card, {-4, 0});
+    cout << s1.player1.card1->name << " " << s1.player1.card2->name << endl;
+    cout << s1.player2.card1->name << " " << s1.player2.card2->name << endl;
+    cout << s1.nextCard->name << endl;
+
+    State s2(s1, PieceId::p2, s1.player1.card2, {-1, 0});
     cout << s2.board.render(PlayerId::P2) << endl;
+    cout << s2.player1.card1->name << " " << s2.player1.card2->name << endl;
+    cout << s2.player2.card1->name << " " << s2.player2.card2->name << endl;
+    cout << s2.nextCard->name << endl;
 
     for (Piece& p: s2.player1.pieces) {
         cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;

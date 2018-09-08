@@ -16,11 +16,11 @@ State::State(array<const Card *, BOARD_SIZE> cards):
  *      move complies with chosen card moves
  *      destination square is empty or enemy piece
  */
-State::State(const State& prev, PieceId piece, const Card*& card, Move move):
+State::State(const State& prev, PieceId piece, const Card *card, Move move):
     player1(prev.player1),
     player2(prev.player2),
     board(player1, player2),
-    nextCard(prev.nextCard)
+    nextCard(card)
 {
     Player& targetPlayer = (prev.currPlayer == PlayerId::P1) ?
         player1 : player2;
@@ -36,7 +36,7 @@ State::State(const State& prev, PieceId piece, const Card*& card, Move move):
     int destCol = src->col + move.cols;
 
     const Piece*& dest = board.grid[destRow][destCol];
-    // Destination should be occupied by enemy piece
+    // Destination should be occupied by other player's piece
     if (dest) {
         bool removed = otherPlayer.removePiece(dest->pieceId);
         if (!removed) {
@@ -48,6 +48,12 @@ State::State(const State& prev, PieceId piece, const Card*& card, Move move):
     board.grid[src->row][src->col] = nullptr;
     src->row = destRow;
     src->col = destCol;
+
+    // Swap chosen card with previous state's next card
+    if (targetPlayer.card1 == card)
+        targetPlayer.card1 = prev.nextCard;
+    else
+        targetPlayer.card2 = prev.nextCard;
 
     // Next player's turn
     currPlayer = (prev.currPlayer == PlayerId::P1) ?
