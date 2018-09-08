@@ -8,7 +8,8 @@ Piece::Piece(PlayerId p, PieceId pc, int r, int c):
     player(p),
     pieceId(pc),
     row(r),
-    col(c) {}
+    col(c)
+{}
 
 string Piece::render(PlayerId currPlayer) const {
     if (currPlayer != player)
@@ -30,8 +31,8 @@ string Piece::render(PlayerId currPlayer) const {
 Player::Player(PlayerId p, const Card *c1, const Card *c2):
     player(p),
     card1(c1),
-    card2(c2) {
-
+    card2(c2)
+{
     if (p == PlayerId::P1) {
         master = new Piece(p, PieceId::m, 4, 2);
         pawns.push_back(Piece(p, PieceId::p1, 4, 0));
@@ -46,6 +47,14 @@ Player::Player(PlayerId p, const Card *c1, const Card *c2):
         pawns.push_back(Piece(p, PieceId::p4, 0, 0));
     }
 }
+
+Player::Player(const Player& other):
+    player(other.player),
+    card1(other.card1),
+    card2(other.card2),
+    master(new Piece(*(other.master))),
+    pawns(other.pawns)
+{}
 
 Player::~Player() {
     delete master;

@@ -11,7 +11,6 @@
 #define BOARD_SIZE      5
 
 class Card;
-extern std::array<Card, NUM_CARDS> CARDS;
 
 /**
  * Singleton class
@@ -22,7 +21,7 @@ private:
     Game();
 public:
     static Game *getInstance();
-    std::array<Card *, BOARD_SIZE> gameCards;
+    std::array<const Card *, BOARD_SIZE> gameCards;
     //std::stack<State>
 };
 
