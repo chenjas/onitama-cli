@@ -54,7 +54,7 @@ Game::Game() {
     }
     State s1(gameCards);
     State s2(s1, PieceId::m, {1, 1});
-    cout << s2.board.render(s2.currPlayer);
+    cout << s2.board.render(PlayerId::P1);
 }
 
 Game *Game::instance = 0;

@@ -34,17 +34,17 @@ Player::Player(PlayerId p, const Card *c1, const Card *c2):
     card2(c2)
 {
     if (p == PlayerId::P1) {
-        master = new Piece(p, PieceId::m, 4, 2);
-        pawns.push_back(Piece(p, PieceId::p1, 4, 0));
-        pawns.push_back(Piece(p, PieceId::p2, 4, 1));
-        pawns.push_back(Piece(p, PieceId::p3, 4, 3));
-        pawns.push_back(Piece(p, PieceId::p4, 4, 4));
+        pieces.push_back(Piece(p, PieceId::p1, 4, 0));
+        pieces.push_back(Piece(p, PieceId::p2, 4, 1));
+        pieces.push_back(Piece(p, PieceId::m, 4, 2));
+        pieces.push_back(Piece(p, PieceId::p3, 4, 3));
+        pieces.push_back(Piece(p, PieceId::p4, 4, 4));
     } else {
-        master = new Piece(p, PieceId::m, 0, 2);
-        pawns.push_back(Piece(p, PieceId::p1, 0, 4));
-        pawns.push_back(Piece(p, PieceId::p2, 0, 3));
-        pawns.push_back(Piece(p, PieceId::p3, 0, 1));
-        pawns.push_back(Piece(p, PieceId::p4, 0, 0));
+        pieces.push_back(Piece(p, PieceId::p1, 0, 4));
+        pieces.push_back(Piece(p, PieceId::p2, 0, 3));
+        pieces.push_back(Piece(p, PieceId::m, 0, 2));
+        pieces.push_back(Piece(p, PieceId::p3, 0, 1));
+        pieces.push_back(Piece(p, PieceId::p4, 0, 0));
     }
 }
 
@@ -52,10 +52,5 @@ Player::Player(const Player& other):
     player(other.player),
     card1(other.card1),
     card2(other.card2),
-    master(new Piece(*(other.master))),
-    pawns(other.pawns)
+    pieces(other.pieces)
 {}
-
-Player::~Player() {
-    delete master;
-}

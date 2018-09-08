@@ -3,19 +3,13 @@
 using namespace std;
 
 Board::Board(Player& p1, Player& p2): grid{0} {
-    for (int i = 0; i < p1.pawns.size(); i++) {
-        Piece *pp = &(p1.pawns[i]);
+    for (int i = 0; i < p1.pieces.size(); i++) {
+        Piece *pp = &(p1.pieces[i]);
         grid[pp->row][pp->col] = pp;
     }
-    for (int i = 0; i < p2.pawns.size(); i++) {
-        Piece *pp = &(p2.pawns[i]);
+    for (int i = 0; i < p2.pieces.size(); i++) {
+        Piece *pp = &(p2.pieces[i]);
         grid[pp->row][pp->col] = pp;
-    }
-    if (p1.master) {
-        grid[p1.master->row][p1.master->col] = p1.master;
-    }
-    if (p2.master) {
-        grid[p2.master->row][p2.master->col] = p2.master;
     }
 }
 

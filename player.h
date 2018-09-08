@@ -20,11 +20,9 @@ class Player {
 public:
     PlayerId player;
     const Card *card1, *card2;
-    Piece *master;
-    std::vector<Piece> pawns;
+    std::vector<Piece> pieces;
     Player(PlayerId, const Card *, const Card *);
     Player(const Player&);
-    ~Player();
 };
 
 #endif // PLAYER_H
