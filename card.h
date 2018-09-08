@@ -14,7 +14,7 @@ public:
     std::string name;
     std::vector<Move> moves;
     Card(std::string, std::vector<Move>);
-    std::string render(int, bool=false);
+    std::string render(int, bool=false) const;
 };
 
 #endif // CARD_H

@@ -72,6 +72,9 @@ Game::Game() {
     for (Piece& p: s2.player2.pieces) {
         cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
     }
+
+    cout << endl;
+    cout << s1.render();
 }
 
 Game *Game::instance = 0;

@@ -1,13 +1,19 @@
 #include "card.h"
 
+// Buffered size of each card name
+#define NAME_SIZE 9
+
 using namespace std;
 
 Card::Card(string n, vector<Move> m) {
     name = n;
+    for (int i = 0; i < NAME_SIZE - (int)n.length(); i++) {
+        name.push_back(' ');
+    }
     moves = m;
 }
 
-string Card::render(int row, bool rotated) {
+string Card::render(int row, bool rotated) const {
     string result = "";
     for (int col = 0; col < BOARD_SIZE; col++) {
         if (row == 2 && col == 2) {

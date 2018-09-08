@@ -25,6 +25,9 @@ string Piece::render(PlayerId currPlayer) const {
             return "3";
         case PieceId::p4:
             return "4";
+        default:
+            cerr << "No valid piece" << endl;
+            exit(1);
     }
 }
 
