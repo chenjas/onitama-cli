@@ -21,6 +21,8 @@ public:
     PlayerId player;
     const Card *card1, *card2;
     std::vector<Piece> pieces;
+    Piece *findPiece(PieceId);
+    bool removePiece(PieceId);
     Player(PlayerId, const Card *, const Card *);
     Player(const Player&);
 };

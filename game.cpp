@@ -53,8 +53,18 @@ Game::Game() {
         gameCards[i] = &(CARDS[i]);
     }
     State s1(gameCards);
-    State s2(s1, PieceId::m, {1, 1});
-    cout << s2.board.render(PlayerId::P1);
+    cout << s1.board.render(PlayerId::P1) << endl;
+    const Card *card = &CARDS[0];
+    State s2(s1, PieceId::p2, card, {-4, 0});
+    cout << s2.board.render(PlayerId::P2) << endl;
+
+    for (Piece& p: s2.player1.pieces) {
+        cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
+    }
+    cout << endl;
+    for (Piece& p: s2.player2.pieces) {
+        cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
+    }
 }
 
 Game *Game::instance = 0;

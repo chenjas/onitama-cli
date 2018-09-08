@@ -10,16 +10,46 @@ State::State(array<const Card *, BOARD_SIZE> cards):
     currPlayer(PlayerId::P1)
 {}
 
-// Can be called only after the move is validated
-State::State(const State& prev, PieceId piece, Move move):
+/**
+ * Precondition: move is a valid, i.e.
+ *      move is within bounds,
+ *      move complies with chosen card moves
+ *      destination square is empty or enemy piece
+ */
+State::State(const State& prev, PieceId piece, const Card*& card, Move move):
     player1(prev.player1),
     player2(prev.player2),
-    board(prev.board),
+    board(player1, player2),
     nextCard(prev.nextCard)
 {
     Player& targetPlayer = (prev.currPlayer == PlayerId::P1) ?
         player1 : player2;
+    Player& otherPlayer = (prev.currPlayer == PlayerId::P1) ?
+        player2 : player1;
 
+    Piece *src = targetPlayer.findPiece(piece);
+    if (!src) {
+        cerr << "Piece not found." << endl;
+        exit(1);
+    }
+    int destRow = src->row + move.rows;
+    int destCol = src->col + move.cols;
+
+    const Piece*& dest = board.grid[destRow][destCol];
+    // Destination should be occupied by enemy piece
+    if (dest) {
+        bool removed = otherPlayer.removePiece(dest->pieceId);
+        if (!removed) {
+            cerr << "Piece not removed." << endl;
+            exit(1);
+        }
+    }
+    dest = src;
+    board.grid[src->row][src->col] = nullptr;
+    src->row = destRow;
+    src->col = destCol;
+
+    // Next player's turn
     currPlayer = (prev.currPlayer == PlayerId::P1) ?
         PlayerId::P2 : PlayerId::P1;
 }

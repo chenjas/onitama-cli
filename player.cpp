@@ -28,6 +28,25 @@ string Piece::render(PlayerId currPlayer) const {
     }
 }
 
+Piece *Player::findPiece(PieceId pid) {
+    for (Piece& p : pieces) {
+        if (p.pieceId == pid)
+            return &p;
+    }
+    return nullptr;
+}
+
+// Return true if piece removed
+bool Player::removePiece(PieceId pid) {
+    for (vector<Piece>::iterator i = pieces.begin(); i < pieces.end(); i++) {
+        if (i->pieceId == pid) {
+            pieces.erase(i);
+            return true;
+        }
+    }
+    return false;
+}
+
 Player::Player(PlayerId p, const Card *c1, const Card *c2):
     player(p),
     card1(c1),
