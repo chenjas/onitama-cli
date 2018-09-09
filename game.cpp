@@ -49,21 +49,19 @@ Game *Game::getInstance() {
 }
 
 Game::Game() {
+    // TODO: randomly select cards
     for (int i = 0; i < BOARD_SIZE; i++) {
         gameCards[i] = &(CARDS[i]);
     }
 
-    State s1(gameCards);
-    cout << s1.board.render(PlayerId::P1) << endl;
-    cout << s1.player1.card1->name << " " << s1.player1.card2->name << endl;
-    cout << s1.player2.card1->name << " " << s1.player2.card2->name << endl;
-    cout << s1.nextCard->name << endl;
+    // Initial state
+    State startState(gameCards);
+    cout << startState.render() << endl;
 
-    State s2(s1, PieceId::p2, s1.player1.card2, {-1, 0});
-    cout << s2.board.render(PlayerId::P2) << endl;
-    cout << s2.player1.card1->name << " " << s2.player1.card2->name << endl;
-    cout << s2.player2.card1->name << " " << s2.player2.card2->name << endl;
-    cout << s2.nextCard->name << endl;
+    startState.validateMove('1', "Tiger", 3, 1);
+
+    State s2(startState, PieceId::p1, startState.player1.card1, {-2, 0});
+    cout << s2.render() << endl;
 
     //for (Piece& p: s2.player1.pieces) {
     //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
@@ -73,8 +71,6 @@ Game::Game() {
     //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
     //}
     //cout << endl;
-
-    s2.validateMove('M', "froG", 1, 1);
 }
 
 Game *Game::instance = 0;
