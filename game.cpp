@@ -65,16 +65,16 @@ Game::Game() {
     cout << s2.player2.card1->name << " " << s2.player2.card2->name << endl;
     cout << s2.nextCard->name << endl;
 
-    for (Piece& p: s2.player1.pieces) {
-        cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
-    }
-    cout << endl;
-    for (Piece& p: s2.player2.pieces) {
-        cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
-    }
+    //for (Piece& p: s2.player1.pieces) {
+    //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
+    //}
+    //cout << endl;
+    //for (Piece& p: s2.player2.pieces) {
+    //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
+    //}
+    //cout << endl;
 
-    cout << endl;
-    cout << s1.render();
+    s2.validateMove('M', "froG", 1, 1);
 }
 
 Game *Game::instance = 0;

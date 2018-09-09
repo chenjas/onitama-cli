@@ -5,6 +5,9 @@
 #include <string>
 #include "game.h"
 
+// Buffered size of each card name
+#define NAME_SIZE 9
+
 struct Move {
     int rows, cols;
 };

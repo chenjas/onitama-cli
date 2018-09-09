@@ -1,8 +1,5 @@
 #include "card.h"
 
-// Buffered size of each card name
-#define NAME_SIZE 9
-
 using namespace std;
 
 Card::Card(string n, vector<Move> m) {
