@@ -13,6 +13,7 @@ public:
 
     State(std::array<const Card *, BOARD_SIZE>);
     State(const State&, PieceId, const Card *, Move);
+    State(State&&);
 
     std::string render();
     bool validateMove(char, std::string, int, int);

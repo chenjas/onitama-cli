@@ -65,6 +65,14 @@ State::State(const State& prev, PieceId piece, const Card *card, Move move):
         PlayerId::P2 : PlayerId::P1;
 }
 
+State::State(State&& other):
+    player1(other.player1),
+    player2(other.player2),
+    board(player1, player2)
+{
+    nextCard = nullptr;
+}
+
 string State::render() {
     string currPlayerStr = (currPlayer == PlayerId::P1) ? "P1" : "P2";
     string otherPlayerStr = (currPlayer == PlayerId::P1) ? "P2" : "P1";

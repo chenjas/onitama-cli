@@ -1,6 +1,6 @@
 .PHONY: all
 
-CFLAGS=-Wall
+CFLAGS=-Wall -g
 
 all: onitama-cli
 

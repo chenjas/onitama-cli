@@ -3,3 +3,4 @@ onitama-cli
 *.exe
 
 test/
+.vscode/

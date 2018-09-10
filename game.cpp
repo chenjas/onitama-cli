@@ -52,22 +52,14 @@ Game::Game() {
     }
 
     // Initial state
-    State startState(gameCards);
-    cout << startState.render() << endl;
+    undoStack.push(State(gameCards));
+    State& top = undoStack.top();
+    cout << top.render() << endl;
 
-    startState.validateMove('1', "Tiger", 3, 1);
+    //startState.validateMove('1', "Tiger", 3, 1);
 
-    State s2(startState, PieceId::p1, startState.player1.card1, {-2, 0});
-    cout << s2.render() << endl;
-
-    //for (Piece& p: s2.player1.pieces) {
-    //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
-    //}
-    //cout << endl;
-    //for (Piece& p: s2.player2.pieces) {
-    //    cout << "id: " << p.pieceId << " row: " << p.row << " col: " << p.col << endl;
-    //}
-    //cout << endl;
+    //State s2(startState, PieceId::p1, startState.player1.card1, {-2, 0});
+    //cout << s2.render() << endl;
 }
 
 Game *Game::instance = 0;
