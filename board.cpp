@@ -3,11 +3,11 @@
 using namespace std;
 
 Board::Board(Player& p1, Player& p2): grid{0} {
-    for (int i = 0; i < p1.pieces.size(); i++) {
+    for (int i = 0; i < (int)p1.pieces.size(); i++) {
         Piece *pp = &(p1.pieces[i]);
         grid[pp->row][pp->col] = pp;
     }
-    for (int i = 0; i < p2.pieces.size(); i++) {
+    for (int i = 0; i < (int)p2.pieces.size(); i++) {
         Piece *pp = &(p2.pieces[i]);
         grid[pp->row][pp->col] = pp;
     }

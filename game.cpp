@@ -52,6 +52,7 @@ Game::Game() {
     }
 
     // Initial state
+    State sample(gameCards);
     undoStack.push(State(gameCards));
     State& top = undoStack.top();
     cout << top.render() << endl;
