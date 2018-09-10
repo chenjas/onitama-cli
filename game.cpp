@@ -1,7 +1,7 @@
 #include "game.h"
+#include "state.h"
 #include "player.h"
 #include "board.h"
-#include "state.h"
 
 using namespace std;
 

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cctype>
+#include <iostream>
 #include "state.h"
 
 using namespace std;

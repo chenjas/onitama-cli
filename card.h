@@ -1,12 +1,11 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <vector>
-#include <string>
-#include "game.h"
-
 // Buffered size of each card name
 #define NAME_SIZE 9
+
+#include <vector>
+#include <string>
 
 struct Move {
     int rows, cols;

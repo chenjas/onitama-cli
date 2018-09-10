@@ -2,6 +2,7 @@
 #define STATE_H
 
 #include "board.h"
+#include "game.h"
 #include "player.h"
 
 class State {
