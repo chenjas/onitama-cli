@@ -3,16 +3,13 @@
 
 #define NUM_CARDS       16
 #define NUM_GAME_CARDS  5
-#define BOARD_SIZE      5
 
 #include <array>
 #include <iostream>
 #include <stack>
-#include "card.h"
 #include "state.h"
-
-
-class Card;
+#include "card.h"
+#include "board.h"
 
 /**
  * Singleton class

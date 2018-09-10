@@ -1,4 +1,5 @@
 #include "card.h"
+#include "board.h"
 
 using namespace std;
 
