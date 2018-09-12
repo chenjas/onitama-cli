@@ -16,7 +16,6 @@ public:
     State(State&&);
 
     std::string render();
-    bool validateMove(char, std::string, int, int);
 };
 
 #endif // STATE_H
