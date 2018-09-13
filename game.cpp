@@ -58,27 +58,18 @@ void Game::reset() {
     }
 
     // Select random cards
-    //vector<int> indices;
-    //for (int i = 0; i < NUM_CARDS; i++) {
-    //    indices.push_back(i);
-    //}
-    //for (int i = 0; i < BOARD_SIZE; i++) {
-    //    int randIndex = rand() % indices.size();
-    //    gameCards[i] = &(CARDS[indices[randIndex]]);
-    //    indices.erase(indices.begin() + randIndex);
-    //}
-    for (int i = 0; i < NUM_GAME_CARDS; i++) {
-        gameCards[i] = &(CARDS[i]);
+    vector<int> indices;
+    for (int i = 0; i < NUM_CARDS; i++) {
+        indices.push_back(i);
+    }
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        int randIndex = rand() % indices.size();
+        gameCards[i] = &(CARDS[indices[randIndex]]);
+        indices.erase(indices.begin() + randIndex);
     }
 
     // Initial state
     undoStack.push(State(gameCards));
-    cout << undoStack.top().render() << endl;
-
-    cout << tryMove('2', "tiger", 3, 2) << endl;
-    cout << undoStack.top().render() << endl;
-
-    cout << tryMove('m', "frog", 5, 1) << endl;
     cout << undoStack.top().render() << endl;
 }
 
@@ -201,6 +192,10 @@ bool Game::tryMove(char piece, string cardName, int row, int col) {
     }
 
     return true;
+}
+
+string Game::renderCurrState() {
+    return undoStack.top().render();
 }
 
 Game *Game::instance = 0;
