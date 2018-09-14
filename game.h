@@ -26,6 +26,8 @@ public:
 
     static Game *getInstance();
     void reset();
+    bool undo();
+    bool redo();
     bool tryMove(char, std::string, int, int);
     std::string renderCurrState();
 };

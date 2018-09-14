@@ -70,7 +70,26 @@ void Game::reset() {
 
     // Initial state
     undoStack.push(State(gameCards));
-    cout << undoStack.top().render() << endl;
+}
+
+bool Game::undo() {
+    if (undoStack.size() == 1) {
+        cout << "Cannot undo." << endl;
+        return false;
+    }
+    redoStack.push(undoStack.top());
+    undoStack.pop();
+    return true;
+}
+
+bool Game::redo() {
+    if (!redoStack.size()) {
+        cout << "Cannot redo." << endl;
+        return false;
+    }
+    undoStack.push(redoStack.top());
+    redoStack.pop();
+    return true;
 }
 
 bool Game::tryMove(char piece, string cardName, int row, int col) {

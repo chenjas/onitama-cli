@@ -29,6 +29,7 @@ int main() {
 
     Game *game = Game::getInstance();
     game->reset();
+    cout << game->renderCurrState() << endl;
 
     bool exitGame = false;
     while (!exitGame) {
@@ -41,18 +42,26 @@ int main() {
             istream_iterator<string>{iss}, istream_iterator<string>{}
         );
         if (!tokens.size()) continue;
-        if (tokens.size() == 1 && tokens[0].size() == 1) {
-            switch (tokens[0][0]) {
-                case 'r':
-                    game->reset();
-                    continue;
-                case 'q':
-                    exitGame = true;
-                    continue;
-                case 'h':
-                    cout << HELP << endl;
-                    continue;
+        if (tokens.size() == 1) {
+            if (tokens[0].size() == 1) {
+                switch (tokens[0][0]) {
+                    case 'r':
+                        game->reset();
+                        cout << game->renderCurrState() << endl;
+                        continue;
+                    case 'q':
+                        exitGame = true;
+                        continue;
+                    case 'h':
+                        cout << HELP << endl;
+                        continue;
+                }
             }
+            bool result = false;
+            if (tokens[0] == "undo") result = game->undo();
+            else if (tokens[0] == "redo") result = game->redo();
+            if (result) cout << game->renderCurrState() << endl;
+            continue;
         }
         if (tokens.size() == 4 && tokens[0].size() == 1 &&
                 tokens[2].size() == 1 and tokens[3].size() == 1) {
@@ -65,7 +74,6 @@ int main() {
             if (result) {
                 cout << endl << game->renderCurrState() << endl;
             }
-
             continue;
         }
         cout << "Invalid command." << endl;
