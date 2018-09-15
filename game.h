@@ -29,6 +29,7 @@ public:
     bool undo();
     bool redo();
     bool tryMove(char, std::string, int, int);
+    bool endState();
     std::string renderCurrState();
 };
 

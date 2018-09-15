@@ -20,7 +20,8 @@ const string HELP =
     "and the destination column, all separated by whitespace and in that precise order.\n"
     "(Example: '1 Tiger 3 5' moves the current player's pawn number 1 to row 3 column 5 "
     "using the 'Tiger' card in his/her hand.)\n"
-    "Count rows from top to bottom and columns from left to right, starting at 1.";
+    "Count rows from top to bottom and columns from left to right, starting at 1.\n"
+    "Enter 'undo' or 'redo' to undo and repo moves respectively.";
 
 
 int main() {
@@ -73,6 +74,12 @@ int main() {
             bool result = game->tryMove(pieceId, cardName, row, col);
             if (result) {
                 cout << endl << game->renderCurrState() << endl;
+                if (game->endState()) {
+                    cout << "Press enter to restart. ";
+                    getline(cin, input);
+                    game->reset();
+                    cout << endl << game->renderCurrState() << endl;
+                }
             }
             continue;
         }

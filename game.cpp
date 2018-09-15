@@ -213,6 +213,32 @@ bool Game::tryMove(char piece, string cardName, int row, int col) {
     return true;
 }
 
+bool Game::endState() {
+    bool end = false;
+    State& currState = undoStack.top();
+    PlayerId otherPlayer = currState.currPlayer == PlayerId::P1 ?
+        PlayerId::P2 : PlayerId::P1;
+
+    // Examine temple arch
+    int archRow = currState.currPlayer == PlayerId::P1 ? BOARD_SIZE - 1 : 0;
+    const Piece *archPiece = currState.board.grid[archRow][2];
+    if (archPiece && archPiece->player == otherPlayer &&
+            archPiece->pieceId == PieceId::m) {
+        end = true;
+    }
+
+    // Examine master piece
+    Player& targetPlayer = currState.currPlayer == PlayerId::P1 ?
+        currState.player1 : currState.player2;
+    Piece *master = targetPlayer.findPiece(PieceId::m);
+    if (!master) end = true;
+
+    if (end) {
+        cout << (otherPlayer == PlayerId::P1 ? "P1" : "P2") << " wins!" << endl;
+    }
+    return end;
+}
+
 string Game::renderCurrState() {
     return undoStack.top().render();
 }
