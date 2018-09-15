@@ -13,16 +13,17 @@ const string WELCOME =
     "Welcome to Onitama! Enter the command 'h' at any time for help.";
 const string INVALID_CMD = "Invalid command; Enter 'h' for help.";
 const string HELP =
-    "Enter 'r' to restart, 'q' to quit.\n"
-    "The current player's temple arch is always oriented on the bottom of the board.\n"
-    "Pieces '1', '2', '3', '4', and 'M' are the pawns and master of the current player.\n"
-    "To move, enter the piece name, the specified card name, the destination row,\n"
-    "and the destination column, all separated by whitespace and in that precise order.\n"
-    "(Example: '1 Tiger 3 5' moves the current player's pawn number 1 to row 3 column 5 "
-    "using the 'Tiger' card in his/her hand.)\n"
-    "Count rows from top to bottom and columns from left to right, starting at 1.\n"
-    "Enter 'undo' or 'redo' to undo and repo moves respectively.";
-
+    "- Enter 'r' to restart, 'q' to quit.\n"
+    "- The current player's temple arch (tile containing the '= = =' symbols) is always\n"
+    "  oriented on the bottom of the board.\n"
+    "- Pieces '1', '2', '3', '4', and 'M' are the pawns and master of the current player.\n"
+    "- Pieces 'e' and 'E' are the pawns and master of the other player, respectively.\n"
+    "- To make a move, enter the piece name, the specified card name, the destination x coordinate,\n"
+    "  and the destination y coordinate, all separated by whitespace and in that precise order\n"
+    "  (treat coordinates like cartesian coordinates).\n"
+    "  Example: '1 Tiger 3 1' moves the current player's pawn number 1 to the coordinates\n"
+    "  (3, 1) using the 'Tiger' card in his/her hand.\n"
+    "- Enter 'undo' or 'redo' to undo and repo moves respectively.";
 
 int main() {
     srand(time(NULL));
@@ -68,8 +69,9 @@ int main() {
                 tokens[2].size() == 1 and tokens[3].size() == 1) {
             char pieceId = tokens[0][0];
             string& cardName = tokens[1];
-            int row = tokens[2][0] - '0';
-            int col = tokens[3][0] - '0';
+            // Subtract from 6 for couting from bottom of board to top
+            int row = (BOARD_SIZE+1) - (tokens[3][0] - '0');
+            int col = tokens[2][0] - '0';
 
             bool result = game->tryMove(pieceId, cardName, row, col);
             if (result) {
